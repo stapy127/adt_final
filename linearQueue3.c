@@ -29,6 +29,12 @@ int Insert(Queue *q, char item) {
     return 0;
   } else {
     q -> QueueItem[(q -> rear)++] = item;
+    if(MAXQUEUE - q -> rear < 3 && q -> front != 0) {
+      for(int i = q -> front, j = 0; i < q -> rear; i++, j++) {
+        q -> QueueItem[j] = q -> QueueItem[i];
+      }
+      q -> front = 0;
+    }
     return 1;
   }
 }
@@ -39,15 +45,7 @@ int Delete(Queue *q, char *item) {
     *item = '\0';
     return 0;
   } else {
-    *item = q -> QueueItem[q -> front];
-    q -> rear --;
-    for(int i = 0; i < q -> rear; i++) {
-      if(i < MAXQUEUE - 1) {
-        q -> QueueItem[i] = q -> QueueItem[i+1];
-      } else {
-        q -> QueueItem[i] = '\0';
-      }
-    }
+    *item = q -> QueueItem[(q -> front)++];
     return 1;
   }
 }
@@ -65,7 +63,7 @@ int main() {
   Delete(myQueue, &item);
   printf("deleted %c\n", item);
   // print item in queue
-  for(int i = 0; i < myQueue -> rear; i++) {
+  for(int i = myQueue -> front; i < myQueue -> rear; i++) {
     printf("%c ", myQueue -> QueueItem[i]);
   }
   printf("\n");

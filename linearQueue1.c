@@ -47,6 +47,7 @@ int Delete(Queue *q, char *item) {
 int main() {
   char items[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k'};
   Queue *myQueue = (Queue*)malloc(sizeof(Queue));
+  InitializeQueue(myQueue);
 
   for(int i = 0; i < sizeof(items); i++) {
     Insert(myQueue, items[i]);
