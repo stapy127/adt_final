@@ -39,7 +39,7 @@ void InsertLast(Node *l, Node *n) {
     p = p -> Next;
   }
   p -> Next = n;
-  n -> Next = l;
+  n -> next = l;
 }
 
 Node* DeleteFirst(Node *l) {
@@ -102,10 +102,10 @@ Node* SearchInfo(Node *l, char info) {
   if(p -> Info != info) {
     do {
       p = p -> Next;
-    } while(p -> Info != info && p != l);
+    } while(p -> Info != info && p != l)
   }
   if(p == l) {
-    p = NULL;
+    p
   }
   return p;
 }

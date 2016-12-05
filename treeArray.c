@@ -1,3 +1,4 @@
+#include <stdio.h>
 #define MAXTREE 100
 typedef struct {
   int info;
@@ -34,15 +35,15 @@ int isRight(int n) {
 }
 
 int LeftNode(int n) {
-  return ((2 * n) + 1)
+  return ((2 * n) + 1);
 }
 
 int RightNode(int n) {
-  return (2 * (n + 1))
+  return (2 * (n + 1));
 }
 
 int MotherNode(int n) {
-  return ((n-1) / 2)
+  return ((n-1) / 2);
 }
 
 int BrotherNode(int n) {
@@ -53,12 +54,12 @@ int BrotherNode(int n) {
   }
 }
 
-int setLeft(Tree *t, int n, int data) {
+void setLeft(Tree *t, int n, int data) {
   int p;
   p = LeftNode(n);
   if(p < MAXTREE) {
     if(t -> node[p].used)
-      printf("Node Inused\n")
+      printf("Node Inused\n");
     else {
       t -> node[p].info = data;
       t -> node[p].used = 1;
@@ -68,12 +69,12 @@ int setLeft(Tree *t, int n, int data) {
   }
 }
 
-int setRight(Tree *t, int n, int data) {
+void setRight(Tree *t, int n, int data) {
   int p;
   p = RightNode(n);
   if(p < MAXTREE) {
     if(t -> node[p].used)
-      printf("Node Inused\n")
+      printf("Node Inused\n");
     else {
       t -> node[p].info = data;
       t -> node[p].used = 1;
@@ -81,4 +82,8 @@ int setRight(Tree *t, int n, int data) {
   } else {
     printf("Tree Overflow\n");
   }
+}
+
+int main() {
+  return 0;
 }
