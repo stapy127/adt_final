@@ -20,6 +20,11 @@ void FreeNode(Node *n) {
 
 void InsertFirst(Node *l, Node *n) {
   n -> Next = l;
+  Node *p = l;
+  while(p -> Next != l) {
+    p = p -> Next;
+  }
+  p -> Next = n;
   l = n;
 }
 
@@ -34,11 +39,17 @@ void InsertLast(Node *l, Node *n) {
     p = p -> Next;
   }
   p -> Next = n;
+  n -> Next = l;
 }
 
 Node* DeleteFirst(Node *l) {
-  Node *n;
+  Node *n, *p;
   n = l;
+  p = l;
+  while(p -> Next != l) {
+    p = p -> Next;
+  }
+  p -> Next = l -> Next;
   l = l -> Next;
   n -> Next = NULL;
   return n;
@@ -53,42 +64,48 @@ Node* DeleteAfter(Node *p) {
 }
 
 Node* DeleteLast(Node *l) {
-  Node *p = l;
-  Node *n;
-  while(p -> Next != NULL) {
-    n = p;
-    p = p -> Next;
+  Node *n = l;
+  Node *p;
+  while(n -> Next != l) {
+    p = n;
+    n = n -> Next;
   }
   n -> Next = NULL;
-  return p;
+  p -> Next = l;
+  return n;
 }
 
 void Traverse(Node *l) {
   Node *p;
   p = l;
-  while(p != NULL) {
+  do {
     // Do something with nodes
     p = p -> Next;
-  }
+  } while(p -> Next != l);
 }
 
 void PrintInfo(Node *l) {
   Node *p;
   p = l;
   int counter = 0;
-  while(p != NULL) {
+  do {
     printf("%c ", p -> Info);
     counter++;
     p = p -> Next;
-  }
+  } while(p -> Next != l);
   printf("\nTotal Nodes: %d\n", counter);
 }
 
 Node* SearchInfo(Node *l, char info) {
   Node *p;
   p = l;
-  while(p -> Info != info && p != NULL) {
-    p = p -> Next;
+  if(p -> Info != info) {
+    do {
+      p = p -> Next;
+    } while(p -> Info != info && p != l);
+  }
+  if(p == l) {
+    p = NULL;
   }
   return p;
 }

@@ -53,14 +53,14 @@ Node* DeleteAfter(Node *p) {
 }
 
 Node* DeleteLast(Node *l) {
-  Node *p = l;
-  Node *n;
-  while(p -> Next != NULL) {
-    n = p;
-    p = p -> Next;
+  Node *n = l;
+  Node *p;
+  while(n -> Next != NULL) {
+    p = n;
+    n = n -> Next;
   }
-  n -> Next = NULL;
-  return p;
+  p -> Next = NULL;
+  return n;
 }
 
 void Traverse(Node *l) {
